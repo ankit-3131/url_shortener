@@ -5,10 +5,13 @@ const schema = new mongoose.Schema({
         type: String,
         required: true
     },
-    shortened_url: {
+    short_id: {
         type: String,
         required: true
+    },
+    visitHistory: {
+        type: [{timestamps: {type:Number}}]
     }
 }, {timestamps: true})
 
-module.exports = mongoose.model('model', schema);
+module.exports = mongoose.model('urlModel', schema);
