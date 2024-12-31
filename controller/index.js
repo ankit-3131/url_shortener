@@ -14,7 +14,7 @@ async function handlerShortUrlGenerator(req, res){
         visitHistory: []
     });
 
-    return res.json({short_id: result.short_id, url: result.user_url})
+    return res.render('home', {shortUrl: result.short_id})
 
 }
 export default handlerShortUrlGenerator;

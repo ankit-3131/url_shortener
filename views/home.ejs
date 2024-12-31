@@ -3,9 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>URL SHORTENER</title>
+    <style>
+        body{
+            background-color: #f0f0f0;
+            font-family: raleway;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        a{
+            text-decoration: none;
+            color: rgb(0, 0, 0);
+        }
+    </style>
 </head>
 <body>
-    <h2>This is from EJS and is showing very well</h2>
+    <h2>URL SHORTENER
+    </h2>
+    <h3>PUT. your url here and<br   >TAKE. away the short url</h3>
+    <form action="/url" method="post">
+        <label for="url">URL : </label>
+        <input type="url" name="url" placeholder="https://www.example.com" required><br>
+        <button type="submit">Shorten</button>
+    </form>
+    <br>
+    <% if (locals.shortUrl) { %>
+    <h3>Shortened URL</h3>
+    <p>http://localhost:5000/url/<%= shortUrl %></p>
+    <button><a target="_blank" href="http://localhost:5000/url/<%= shortUrl %>">Paste and Open in new Tab</a></button>
+    <% } %>
+
 </body>
 </html>
