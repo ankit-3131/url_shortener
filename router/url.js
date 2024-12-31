@@ -9,13 +9,12 @@ router.route('/')
 })
 .post(handlerShortUrlGenerator)
 
-router.route('/:shortId')
-.get(async (req,res)=>{
+router.get('/:shortId', async (req,res)=>{
     try{
     const shortId = req.params.shortId
-    const data = await urlModel.findOneAndUpdate(
+    const event = await urlModel.findOneAndUpdate(
         {
-        shortId
+            short_id: shortId
     },
         {
             $push:{
@@ -25,10 +24,12 @@ router.route('/:shortId')
     },
 }
     );
-    if(!data) return res.json({message: "URL was unknown to us !"});
-    res.redirect(data.user_url);}
+    if (!event) {
+        return res.json({ message: "URL was unknown to us!" });
+    }               
+    return res.redirect(event.user_url)}
+
     catch(error){console.error(error);
     }
 })
-
 export default router
