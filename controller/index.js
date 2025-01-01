@@ -11,10 +11,12 @@ async function handlerShortUrlGenerator(req, res){
     const result = await model.create({
         short_id: short_id,
         user_url: data.url,
-        visitHistory: []
+        visitHistory: [],
+        createdBy: req.user._id
     });
+    const allurls = await model.find({createdBy: req.user._id})
 
-    return res.render('home', {shortUrl: result.short_id})
+    return res.render('home', {shortUrl: result.short_id, urls: allurls});
 
 }
 export default handlerShortUrlGenerator;

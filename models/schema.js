@@ -11,6 +11,10 @@ const schema = new mongoose.Schema({
     },
     visitHistory: {
         type: [{timestamps: {type:Number}}]
+    },
+    createdBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref : "users"
     }
 }, {timestamps: true})
 

@@ -1,15 +1,19 @@
-
+import { v4 as uuidv4 } from 'uuid';
 import db from '../models/user.js';
-export async function handlerUserLogin(req, res){
+import { setUser } from '../service/auth.js';
+async function handlerUserLogin(req, res){
     const {email, password} = req.body;
-    const isThere = await db.findOne({email,password});
-    if(!isThere){
+    const userIsThere = await db.findOne({email,password});
+    if(!userIsThere){
         return res.send("either email or password is wrong");
     }
-    res.redirect('/');
+    const sessionId = uuidv4();
+    setUser(sessionId, userIsThere);
+    res.cookie("uid", sessionId)
+    return res.redirect('/');
 }
 
-export async function handlerUserSignup(req, res){
+async function handlerUserSignup(req, res){
 
     const {firstName,lastName, email, password} = req.body;
     try{
@@ -24,4 +28,4 @@ export async function handlerUserSignup(req, res){
         console.log("ERROR CREATING AN USER", err);
     }
 }
-// export default {handlerUserLogin, handlerUserSignup};
+export {handlerUserLogin, handlerUserSignup};

@@ -19,8 +19,7 @@
     </style>
 </head>
 <body>
-    <h2>URL SHORTENER
-    </h2>
+    <h2>URL SHORTENER</h2>
     <h3>PUT. your url here and<br   >TAKE. away the short url</h3>
     <form action="/url" method="post">
         <label for="url">URL : </label>
@@ -33,6 +32,19 @@
     <p>http://localhost:5000/url/<%= shortUrl %></p>
     <button><a target="_blank" href="http://localhost:5000/url/<%= shortUrl %>">Paste and Open in new Tab</a></button>
     <% } %>
+        <br>
+        <br>
+    <div>
+        <h3>Your shortened URLs</h3>
+        <ul>
+            <% urls.forEach(url => { %>
+                <li>
+                    <a href="<%= url.user_url %>"><%= url.short_id %></a>
+                    <p>views: <%= url.visitHistory.length %></p>
+                </li>
+            <% }) %>
+        </ul>
+    </div>
 
 </body>
 </html>
