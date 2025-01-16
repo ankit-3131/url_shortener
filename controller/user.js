@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 import db from '../models/user.js';
 import { setUser } from '../service/auth.js';
 async function handlerUserLogin(req, res){
@@ -7,9 +7,9 @@ async function handlerUserLogin(req, res){
     if(!userIsThere){
         return res.send("either email or password is wrong");
     }
-    const sessionId = uuidv4();
-    setUser(sessionId, userIsThere);
-    res.cookie("uid", sessionId)
+    // const sessionId = uuidv4();
+    const token = setUser(userIsThere);
+    res.cookie("token", token);
     return res.redirect('/');
 }
 

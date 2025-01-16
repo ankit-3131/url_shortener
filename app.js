@@ -21,8 +21,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cookieParser())
 
-app.get('/', checkAuth,whichUser, async (req, res) => {
-    console.log(req.user)
+app.get('/', checkAuth, whichUser, async (req, res) => {
     const allurls = await model.find({createdBy: req.user._id});
     res.render('home.ejs', {urls: allurls});
 })
